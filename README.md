@@ -2,21 +2,26 @@
 
 ### A simple webhook log parser.
 
-A CLI application to parse a HTTP serve log file and retrieve information about it.
+A CLI application to parse a HTTP serve log file and retrieve the most requested URLs and status.
 
-Design considerations
+Design considerations:
+- Parse file as a stream;
+- Use immutable structures;
+- Maximum algorithm complexity O(N);
 
 ### Run
 
-To run you will have to download and install the [SBT](http://www.scala-sbt.org/download.html), then you can compile the code:
+First you will have to download and install the [SBT](http://www.scala-sbt.org/download.html) tool, then you can compile the code:
 
 ```shell
 $ sbt assembly
 # ...
-[info] Assembly up to date: /Users/hilios/Sites/moip-challenge/target/scala-2.12/moip-challenge.jar
+[info] SHA-1: 6b66f060834bd9a95803d16913274f3b8ddd042a
+[info] Packaging /your/path/moip-challenge/target/scala-2.12/moip-challenge.jar ...
+[info] Done packaging.
 ```
 
-To run just execute the `jar` (with Java 8) passing the path to the log file as arguments:
+To run just execute the `jar` (with Java 8) passing the path to the log file as arguments and the output will be displayed:
 
 ```shell
 $ java -jar target/scala-2.12/moip-challenge.jar ./src/test/resources/log.txt
@@ -43,13 +48,15 @@ Top 10 response status:
   204 - 1388
 ```
 
-Or if you prefer run through the SBT (slower).
+Or if you prefer run through the SBT (it's a little bit slower).
 
 ```
 $ sbt "run ./src/test/resources/log.txt"
 ```
 
 ### Unit tests
+
+Run the tests through [SBT](http://www.scala-sbt.org/download.html):
 
 ```shell
 $ sbt test

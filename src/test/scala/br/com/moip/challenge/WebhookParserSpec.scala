@@ -36,7 +36,7 @@ class WebhookParserSpec extends FlatSpec with Matchers {
     )
   }
 
-  "#top10Status" should "return the top 10 requests url" in {
+  "#top10Status" should "return the top 10 responded status" in {
     WebhookParser(requests).top10Status shouldBe Seq(
       (200, 20),
       (201, 19),
