@@ -4,7 +4,7 @@ import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
 /**
-  * A simple CLI application that parses webhook log file.
+  * A simple CLI application that parses some webhook log file.
   */
 object Main extends App {
   args match {
@@ -18,12 +18,10 @@ object Main extends App {
           println(
             s"""
               #Top 10 URLs:
-              #${requests.top10Urls
-                .map({ case (url, count) => s"> $url - $count" }).mkString("\n")}
+              #${requests.top10Urls.map(x => s"  ${x._1} - ${x._2}").mkString("\n")}
               #
               #Top 10 response status:
-              #${requests.top10Status
-                .map({ case (status, count) => s"> $status - $count"}).mkString("\n")}
+              #${requests.top10Status.map(x => s"  ${x._1} - ${x._2}").mkString("\n")}
             """.stripMargin('#'))
 
         case Failure(e) =>
