@@ -10,14 +10,22 @@ object Main extends App {
   args match {
     case Array(path) =>
       Try {
-        // the get lines return an iterator, so we won't load all file into memory
-        val requests = Source.fromFile(path).getLines()
-        .map(WebhookRequest.parse)
-        .filter(_.nonEmpty)
-
-
+        // Returns an iterator, so we won't load all file into memory
+        val log = Source.fromFile(path).getLines()
+        WebhookRequestParser(log)
       } match {
-        case Success(requests) => ???
+        case Success(requests) =>
+          println(
+            s"""
+              #Top URLs:
+              #${requests.top10Urls
+                .map({ case (url, count) => s"> $url - $count" }).mkString("\n")}
+              #
+              #Top response status:
+              #${requests.top10Status
+                .map({ case (status, count) => s"> $status - $count"}).mkString("\n")}
+            """.stripMargin('#'))
+
         case Failure(e) =>
           println(s"Could not parse the file: ${e.getMessage}")
       }
