@@ -1,14 +1,15 @@
 # MOIP Challenge
 
-### A simple webhook log parser.
+#### A simple webhook log parser.
 
 A CLI application to parse a HTTP serve log file and retrieve the most requested URLs and statuses.
 
-Design considerations:
+**Design considerations**:
 - Parse file as a stream;
 - Use immutable structures;
+- Functional programming;
 
-#### Running
+### Running
 
 First you will have to download and install the [SBT](http://www.scala-sbt.org/download.html) tool, then compile the code:
 
@@ -47,13 +48,13 @@ Top 10 response status:
   204 - 1388
 ```
 
-Or if you prefer run through the SBT (it's a little bit slower).
+Or if you prefer run through the SBT (although it's a little bit slower).
 
 ```
 $ sbt "run ./src/test/resources/log.txt"
 ```
 
-#### Testing
+### Testing
 
 Run the tests through [SBT](http://www.scala-sbt.org/download.html):
 
