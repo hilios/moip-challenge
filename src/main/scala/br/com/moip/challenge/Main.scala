@@ -12,16 +12,16 @@ object Main extends App {
       Try {
         // Returns an iterator, so we won't load all file into memory
         val log = Source.fromFile(path).getLines()
-        WebhookRequestParser(log)
+        WebhookParser(log)
       } match {
         case Success(requests) =>
           println(
             s"""
-              #Top URLs:
+              #Top 10 URLs:
               #${requests.top10Urls
                 .map({ case (url, count) => s"> $url - $count" }).mkString("\n")}
               #
-              #Top response status:
+              #Top 10 response status:
               #${requests.top10Status
                 .map({ case (status, count) => s"> $status - $count"}).mkString("\n")}
             """.stripMargin('#'))
